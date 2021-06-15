@@ -7,7 +7,7 @@ export const Requests = () => {
         <ul>
             ${
                 requests.map( request  => {
-                    return `<li>${request.description} Needed by ${request.neededBy}</li>`
+                    return `<li>${request.description} Needed by ${request.neededBy}. Location is ${request.address}. Budget is $${request.budget.toFixed(2)} </li>`
                 }
                 )}
         </ul>

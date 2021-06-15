@@ -13,4 +13,6 @@ export const fetchRequests = () => {
             }
         )
 }
-export const getRequests = () => [...applicationState.requests]
+export const getRequests = () => {
+    return applicationState.requests.map(request => ({...request})
+    )}
