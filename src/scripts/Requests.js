@@ -1,17 +1,25 @@
-import { getRequests } from "./dataAccess.js"
+import { deleteRequest, getRequests } from "./dataAccess.js"
+
+container.addEventListener("click", click => {
+    if (click.target.id.startsWith("request--")) {
+        const [, requestId] = click.target.id.split("--")
+        deleteRequest(parseInt(requestId))
+    }
+}
+)
 
 export const Requests = () => {
     const requests = getRequests() // grab the local state of the requests data
-
-    let html = `
-        <ul>
-            ${
-                requests.map( request  => {
-                    return `<li>${request.description} Needed by ${request.neededBy}. Location is ${request.address}. Budget is $${request.budget.toFixed(2)} </li>`
-                }
-                )}
-        </ul>
-    `
-
-    return html
-            }
+    
+   const requestHTML =  `<ul> ${requests.map(
+       (request) => 
+    `<li>
+        ${request.description}
+        <button class="request__delete"
+                id="request--${request.id}">
+            Delete
+        </button>
+    </li>`
+       ).join("")}</ul>`
+       return requestHTML
+    }

@@ -26,10 +26,19 @@ export const sendRequest = (userServiceRequest) => {
         body: JSON.stringify(userServiceRequest)
     }
     
-    
     return fetch(`${API}/requests`, fetchOptions)
         .then(response => response.json())
         .then(() => {
                 // do something after the POST is finished. Stay tuned for what to put here!
+        mainContainer.dispatchEvent(new customEvent("stateChanged"))
         })
+}
+
+export const deleteRequest = (id) => {
+    return fetch(`${API}/requests/${id}`, { method: "DELETE" })
+        .then(
+            () => {
+                container.dispatchEvent(new CustomEvent("stateChanged"))
+            }
+        )
 }
